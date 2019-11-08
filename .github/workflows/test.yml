@@ -1,4 +1,4 @@
-name: 'Test typescript-action'
+name: test-await
 on:
   pull_request:
   push:

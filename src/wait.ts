@@ -1,4 +1,5 @@
 import * as github from '@actions/github'
+import * as core from '@actions/core'
 import * as _ from 'lodash'
 import Octokit from '@octokit/rest'
 
@@ -15,6 +16,7 @@ export async function wait(
   const octokit = new github.GitHub(ghToken)
 
   while (true) {
+    await new Promise(resolve => setTimeout(resolve, waitMs))
     const awaiting = await getRunningChecksCount(
       octokit,
       namePattern,
@@ -23,7 +25,6 @@ export async function wait(
     if (awaiting <= 0) break
 
     console.log(`Awaiting ${awaiting} jobs to complete...`)
-    await new Promise(resolve => setTimeout(resolve, waitMs))
   }
 }
 
@@ -36,6 +37,9 @@ export const getRunningChecksCount = async (
     ...context.repo,
     ref: context.ref
   })
+
+  core.debug('Checks found:')
+  core.debug(JSON.stringify(checks, null, 2))
 
   if (!checks.data) return 0
 
