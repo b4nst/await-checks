@@ -5,9 +5,9 @@ branding:
   icon: 'clock'
   color: 'black'
 inputs:
-  names:
-    description: 'Workflow names to wait'
-    default: ''
+  name_pattern:
+    description: 'Workflow names pattern (regex)'
+    default: '.*'
   github_token:
     description: 'Github token to make api calls'
   include_queue:
