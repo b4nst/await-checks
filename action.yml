@@ -2,7 +2,7 @@ name: 'Await checks'
 description: 'Await running checks before continuing'
 author: 'banst'
 branding:
-  icon: 'clock'  
+  icon: 'clock'
   color: 'black'
 inputs:
   names:
