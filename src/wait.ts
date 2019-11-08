@@ -17,11 +17,13 @@ export async function wait(
 
   while (true) {
     await new Promise(resolve => setTimeout(resolve, waitMs))
+    console.log('Count jobs with name', namePattern)
     const awaiting = await getRunningChecksCount(
       octokit,
       namePattern,
       includeQueued ? ['completed', 'queued'] : ['completed']
     )
+    console.log('Found', awaiting, 'jobs')
     if (awaiting <= 0) break
 
     console.log(`Awaiting ${awaiting} jobs to complete...`)
@@ -38,8 +40,7 @@ export const getRunningChecksCount = async (
     ref: context.ref
   })
 
-  core.debug('Checks found:')
-  core.debug(JSON.stringify(checks, null, 2))
+  console.log('Checks found:', checks)
 
   if (!checks.data) return 0
 
