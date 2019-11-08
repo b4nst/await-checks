@@ -64,11 +64,3 @@ test('getChecks', async () => {
     ref: github.context.ref
   })
 })
-
-test('wait until ', async () => {
-  const start = new Date()
-  await wait(500)
-  const end = new Date()
-  var delta = Math.abs(end.getTime() - start.getTime())
-  expect(delta).toBeGreaterThan(450)
-})
