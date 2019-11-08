@@ -4,7 +4,7 @@ import { wait } from './wait'
 async function run() {
   try {
     const name = core.getInput('name_pattern')
-    const token = core.getInput('github_token')
+    const token = core.getInput('github_token', { required: true })
     const includeQueue = core.getInput('include_queue')
     const waitMs = core.getInput('wait_ms')
 

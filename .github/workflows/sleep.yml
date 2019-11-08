@@ -1,0 +1,13 @@
+name: sleep
+on:
+  pull_request:
+  push:
+    branches:
+      - master
+      - 'releases/*'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - run: sleep 120

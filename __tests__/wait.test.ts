@@ -1,7 +1,8 @@
-import { wait, countMatchingChecks, getRunningChecksCount } from '../src/wait'
-import Octokit = require('@octokit/rest')
 import * as github from '@actions/github'
 
+import { countMatchingChecks, getRunningChecksCount } from '../src/wait'
+
+import Octokit = require('@octokit/rest')
 test('countMatchingChecks', () => {
   const checks: Partial<Octokit.ChecksListForRefResponseCheckRunsItem>[] = [
     {

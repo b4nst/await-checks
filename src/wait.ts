@@ -47,5 +47,10 @@ export const countMatchingChecks = (
   pattern: RegExp,
   status: CheckStatus[]
 ) =>
-  _.filter(checks, c => pattern.test(c.name) && _.includes(status, c.status))
-    .length
+  _.filter(
+    checks,
+    c =>
+      c.name !== context.workflow &&
+      pattern.test(c.name) &&
+      _.includes(status, c.status)
+  ).length
