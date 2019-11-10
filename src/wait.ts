@@ -40,7 +40,7 @@ export const getRunningChecksCount = async (
     ref: context.ref
   })
 
-  console.log('Checks found:', checks)
+  console.log('Checks found:', JSON.stringify(checks, null, 2))
 
   if (!checks.data) return 0
 
