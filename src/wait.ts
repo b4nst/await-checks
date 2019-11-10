@@ -40,7 +40,7 @@ export const getRunningChecksCount = async (
     ref: context.ref
   })
 
-  console.log('Checks found:', JSON.stringify(checks, null, 2))
+  console.log('Checks found:', _.map(checks, _.property('name')))
 
   if (!checks.data) return 0
 
@@ -52,10 +52,17 @@ export const countMatchingChecks = (
   pattern: RegExp,
   status: CheckStatus[]
 ) =>
-  _.filter(
-    checks,
-    c =>
-      c.name !== context.workflow &&
-      pattern.test(c.name) &&
-      _.includes(status, c.status)
-  ).length
+  _.filter(checks, c => {
+    const isNotSameJob = c.name !== context.workflow
+    const matchPattern = pattern.test(c.name)
+    const includeStatus = _.includes(status, c.status)
+    console.log(
+      c.name,
+      isNotSameJob,
+      pattern,
+      matchPattern,
+      c.status,
+      includeStatus
+    )
+    return isNotSameJob && matchPattern && includeStatus
+  }).length
