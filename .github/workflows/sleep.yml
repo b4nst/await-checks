@@ -4,10 +4,10 @@ on:
   push:
     branches:
       - master
-      - 'releases/*'
+      - "releases/*"
 
 jobs:
-  test:
+  sleep:
     runs-on: ubuntu-latest
     steps:
       - run: sleep 120
