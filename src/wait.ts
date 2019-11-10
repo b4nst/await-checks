@@ -58,6 +58,7 @@ export const countMatchingChecks = (
     const includeStatus = _.includes(status, c.status)
     console.log(
       c.name,
+      context.workflow,
       isNotSameJob,
       pattern,
       matchPattern,
