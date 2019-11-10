@@ -35,7 +35,7 @@ export const getRunningChecksCount = async (
   namePattern: RegExp,
   status: CheckStatus[]
 ) => {
-  const checks = await octo.checks.listSuitesForRef({
+  const checks = await octo.checks.listForRef({
     ...context.repo,
     ref: context.ref
   })
@@ -44,18 +44,18 @@ export const getRunningChecksCount = async (
 
   if (!checks.data) return 0
 
-  return countMatchingChecks(checks.data.check_suites, namePattern, status)
+  return countMatchingChecks(checks.data.check_runs, namePattern, status)
 }
 
 export const countMatchingChecks = (
-  checks: Octokit.ChecksListSuitesForRefResponseCheckSuitesItem[],
+  checks: Octokit.ChecksListForRefResponseCheckRunsItem[],
   pattern: RegExp,
   status: CheckStatus[]
 ) =>
   _.filter(
     checks,
     c =>
-      c.node_id !== context.workflow &&
-      pattern.test(c.node_id) &&
+      c.name !== context.workflow &&
+      pattern.test(c.name) &&
       _.includes(status, c.status)
   ).length
